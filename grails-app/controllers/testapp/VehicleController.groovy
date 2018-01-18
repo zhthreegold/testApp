@@ -7,6 +7,8 @@ class VehicleController {
 
     VehicleService vehicleService
 
+    def valueEstimateService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -15,7 +17,7 @@ class VehicleController {
     }
 
     def show(Long id) {
-        respond vehicleService.get(id)
+        respond vehicle, model: [estimatedValue: valueEstimateService.getEstimate(vehicle)]
     }
 
     def create() {
